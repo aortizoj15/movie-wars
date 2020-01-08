@@ -24,7 +24,7 @@ figure .image img {
 }
 
 .title .icon {
-  margin-left: 15px;
+  margin: 0px 15px;
 }
 
 .hero {
@@ -45,4 +45,9 @@ figure .image img {
 .dropdown-item img {
   height: 50px;
   margin-right: 10px;
+}
+
+.title-container {
+  display: flex;
+  justify-content: center;
 }

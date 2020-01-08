@@ -17,12 +17,12 @@
   <body>
     <section class="hero is-dark is-bold">
       <div class="hero-body">
-        <div class="container">
+        <div class="title-container">
           <h1 class="title">
-            Movie Wars
             <span class="icon">
               <i class="fas fa-film" aria-hidden="true"></i>
             </span>
+            Movie Wars
             <span class="icon">
               <i class="fa fa-fighter-jet" aria-hidden="true"></i>
             </span>
@@ -31,11 +31,23 @@
       </div>
     </section>
     <div class="container">
-      <div class="autocomplete"></div>
-      <div id="summary"></div>
+      <div class="columns">
+        <div class="column">
+          <div id="left-input-widget"></div>
+          <div id="left-summary"></div>
+        </div>
+        <div class="column">
+          <div id="right-input-widget"></div>
+          <div id="right-summary"></div>
+        </div>
+      </div>
+      <div class="column is-half notification is-dark tutorial">
+        <h1>Search For Two Movies</h1>
+        <p class="subtitle">You will see which movie is better! Enjoy :)</p>
+      </div>
     </div>
     <script src="utils.js"></script>
-    <script src="autoDisplay.js"></script>
+    <script src="inputWidget.js"></script>
     <script src="index.js"></script>
   </body>
 </html>
