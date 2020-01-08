@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie Wars 🎬✈</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section class="hero is-dark is-bold">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            Movie Wars
+            <span class="icon">
+              <i class="fas fa-film" aria-hidden="true"></i>
+            </span>
+            <span class="icon">
+              <i class="fa fa-fighter-jet" aria-hidden="true"></i>
+            </span>
+          </h1>
+        </div>
+      </div>
+    </section>
+    <div class="container">
+      <div class="autocomplete"></div>
+      <div id="summary"></div>
+    </div>
+    <script src="utils.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
