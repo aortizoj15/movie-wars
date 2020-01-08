@@ -1,0 +1,3 @@
+const makeAutoDisplay = (config) => {
+
+}
