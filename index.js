@@ -59,45 +59,69 @@ const fetchMovie = async (movie, summaryContainer, sideIdentifier) => {
   else {
     rightDetails = response.data;
   }
-  if (leftMovieDetails && rightMovieDetails) {
+  if (leftDetails && rightDetails) {
     compareMovies();
   }
 }
 
-const movieTemplate = (movieDetail) => {
+const compareMovies = () => {
+
+}
+
+const movieTemplate = ({BoxOffice, Title, Genre, Plot, Poster, Awards, Year, Metascore, imdbVotes, imdbRating}) => {
+  if (BoxOffice && Metascore && imdbRating) {
+    const dollarToNum = parseInt(BoxOffice.replace(/\$/g, '').replace(/,/g, ''));
+    const metascoreToNum = parseInt(Metascore);
+    const imdbRatingToNum = parseFloat(imdbRating);
+    const imdbVotesToNum = parseInt(imdbVotes.replace(/,/g, ''));
+    let count = 0;
+    const wordArr = Awards.split(' ');
+    wordArr.reduce((acc, val) => {
+      const validValue = parseInt(val);
+      if (isNaN(validValue)) {
+        return acc;
+      }
+      count = count + validValue;
+      return count;
+    });
+  }
   return `
     <article class="media">
       <figure class="media-left">
         <p class="image">
-          <img src="${movieDetail.Poster}" alt="movieDetail.Title" />
+          <img src="${Poster}" alt="movieDetail.Title" />
         </p>
       </figure>
       <div class="media-content">
         <div class="content">
-          <h1>${movieDetail.Title}</h1>
-          <h4>${movieDetail.Genre}</h4>
-          <p>${movieDetail.Plot}</p>
+          <h1>${Title}</h1>
+          <h4>${Genre}</h4>
+          <p>${Plot}</p>
         </div>
       </div>
     </article>
-    <article class="notification is-primary">
-      <p class="title">${movieDetail.Awards}</p>
+    <article class="notification is-dark">
+      <p class="title">${Awards}</p>
       <p class="subtitle">Awards</p>
     </article>
-    <article class="notification is-primary">
-    <p class="title">${movieDetail.Year}</p>
+    <article class="notification is-dark">
+    <p class="title">${Year} Released</p>
     <p class="subtitle">Year</p>
     </article>
-    <article class="notification is-primary">
-    <p class="title">${movieDetail.Metascore}</p>
+    <article class="notification is-dark">
+    <p class="title">${BoxOffice}</p>
+    <p class="subtitle">BoxOffice</p>
+    </article>
+    <article class="notification is-dark">
+    <p class="title">${Metascore}</p>
     <p class="subtitle">Metascore</p>
     </article>
-    <article class="notification is-primary">
-      <p class="title">${movieDetail.imdbRating}</p>
+    <article class="notification is-dark">
+      <p class="title">${imdbRating}</p>
       <p class="subtitle">IMDB Rating</p>
     </article>
-    <article class="notification is-primary">
-      <p class="title">${movieDetail.imdbVotes}</p>
+    <article class="notification is-dark">
+      <p class="title">${imdbVotes}</p>
       <p class="subtitle">IMDB Votes</p>
     </article>
   `;
