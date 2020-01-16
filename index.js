@@ -65,26 +65,39 @@ const fetchMovie = async (movie, summaryContainer, sideIdentifier) => {
 }
 
 const compareMovies = () => {
+  const leftSummaryValues = document.querySelectorAll('#left-summary .notification');
+  const rightSummaryValues = document.querySelectorAll('#right-summary .notification');
 
+  leftSummaryValues.forEach((val, idx) => {
+    const rightValueElement = rightSummaryValues[idx];
+    const currentLeftValue = parseInt(val.dataset.value);
+    const currentRightValue = parseInt(rightValueElement.dataset.value);
+    if (currentLeftValue > currentRightValue) {
+      val.classList.remove('is-dark');
+      val.classList.add('is-primary');
+    }
+    else {
+      rightValueElement.classList.remove('is-dark');
+      rightValueElement.classList.add('is-primary');
+    }
+  });
 }
 
 const movieTemplate = ({BoxOffice, Title, Genre, Plot, Poster, Awards, Year, Metascore, imdbVotes, imdbRating}) => {
-  if (BoxOffice && Metascore && imdbRating) {
-    const dollarToNum = parseInt(BoxOffice.replace(/\$/g, '').replace(/,/g, ''));
-    const metascoreToNum = parseInt(Metascore);
-    const imdbRatingToNum = parseFloat(imdbRating);
-    const imdbVotesToNum = parseInt(imdbVotes.replace(/,/g, ''));
-    let count = 0;
-    const wordArr = Awards.split(' ');
-    wordArr.reduce((acc, val) => {
-      const validValue = parseInt(val);
-      if (isNaN(validValue)) {
-        return acc;
-      }
-      count = count + validValue;
-      return count;
-    });
-  }
+  const boxOfficeToNum = parseInt(BoxOffice.replace(/\$/g, '').replace(/,/g, ''));
+  const metascoreToNum = parseInt(Metascore);
+  const imdbRatingToNum = parseFloat(imdbRating);
+  const imdbVotesToNum = parseInt(imdbVotes.replace(/,/g, ''));
+  const awardWordArr = Awards.split(' ');
+  const awardCount = awardWordArr.reduce((acc, val) => {
+    const validValue = parseInt(val);
+    if (isNaN(validValue)) {
+      return acc;
+    }
+    return acc + validValue;
+  }, 0);
+  console.log(awardCount);
+
   return `
     <article class="media">
       <figure class="media-left">
@@ -100,29 +113,29 @@ const movieTemplate = ({BoxOffice, Title, Genre, Plot, Poster, Awards, Year, Met
         </div>
       </div>
     </article>
-    <article class="notification is-dark">
+    <article data-value=${awardCount} class="notification is-dark">
       <p class="title">${Awards}</p>
       <p class="subtitle">Awards</p>
     </article>
-    <article class="notification is-dark">
-    <p class="title">${Year} Released</p>
-    <p class="subtitle">Year</p>
+    <article data-value=${boxOfficeToNum} class="notification is-dark">
+      <p class="title">${BoxOffice}</p>
+      <p class="subtitle">BoxOffice</p>
     </article>
-    <article class="notification is-dark">
-    <p class="title">${BoxOffice}</p>
-    <p class="subtitle">BoxOffice</p>
+    <article data-value=${metascoreToNum} class="notification is-dark">
+      <p class="title">${Metascore}</p>
+      <p class="subtitle">Metascore</p>
     </article>
-    <article class="notification is-dark">
-    <p class="title">${Metascore}</p>
-    <p class="subtitle">Metascore</p>
-    </article>
-    <article class="notification is-dark">
+    <article data-value=${imdbRatingToNum} class="notification is-dark">
       <p class="title">${imdbRating}</p>
       <p class="subtitle">IMDB Rating</p>
     </article>
-    <article class="notification is-dark">
+    <article data-value=${imdbVotesToNum} class="notification is-dark">
       <p class="title">${imdbVotes}</p>
       <p class="subtitle">IMDB Votes</p>
     </article>
-  `;
+    <article data-value=${Year} class="notification is-dark">
+      <p class="title">${Year}</p>
+      <p class="subtitle">Release Year</p>
+    </article>
+    `;
 }
