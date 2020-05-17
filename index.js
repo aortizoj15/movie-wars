@@ -46,7 +46,7 @@ makeInputWidget({
 let leftDetails;
 let rightDetails;
 const fetchMovie = async (movie, summaryContainer, sideIdentifier) => {
-  const response = await axios.get("http://www.omdbapi.com/", {
+  const response = await axios.get("https://www.omdbapi.com/", {
     params: {
       apikey: "763ec5e7",
       i: movie.imdbID
