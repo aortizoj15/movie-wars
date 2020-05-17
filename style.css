@@ -51,3 +51,9 @@ figure .image img {
   display: flex;
   justify-content: center;
 }
+#left-input-widget {
+  display: inline;
+}
+#right-input-widget {
+  display: inline;
+}
